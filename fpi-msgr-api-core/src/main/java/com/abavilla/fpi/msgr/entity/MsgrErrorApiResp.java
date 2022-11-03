@@ -12,9 +12,21 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @RegisterForReflection
 public class MsgrErrorApiResp extends AbsMongoField {
-  private String message;
-  private String type;
-  private Integer code;
-  @JsonProperty("fbtrace_id")
-  private String fbTraceId;
+
+  @Data
+  @EqualsAndHashCode(callSuper = true)
+  @NoArgsConstructor
+  @RegisterForReflection
+  public static class ErrorField extends AbsMongoField {
+    private String message;
+    private String type;
+    private Integer code;
+    @JsonProperty("error_subcode")
+    private Integer subCode;
+    @JsonProperty("fbtrace_id")
+    private String fbTraceId;
+  }
+
+  private ErrorField error;
+
 }

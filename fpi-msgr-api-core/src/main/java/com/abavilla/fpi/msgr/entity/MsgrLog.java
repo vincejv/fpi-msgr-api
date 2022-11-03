@@ -19,7 +19,7 @@ public class MsgrLog extends AbsMongoItem {
   private String recipient;
   private String pageId;
   private String msgContent;
-  private MsgrErrorApiResp apiError;
+  private MsgrErrorApiResp.ErrorField apiError;
   private List<MsgAttchmt> attachments;
   private String fpiUser;
   private String fpiSystem;
