@@ -14,6 +14,7 @@ import com.abavilla.fpi.msgr.entity.MsgrLog;
 import com.abavilla.fpi.msgr.ext.dto.MsgrMsgReqDto;
 import com.abavilla.fpi.msgr.mapper.MsgrMsgReqMapper;
 import com.abavilla.fpi.msgr.repo.MsgrLogRepo;
+import io.quarkus.logging.Log;
 import io.quarkus.security.identity.SecurityIdentity;
 import io.smallrye.mutiny.Uni;
 import org.apache.commons.lang3.StringUtils;
@@ -59,7 +60,8 @@ public class MsgrReqSvc extends AbsRepoSvc<MsgrMsgReqDto, MsgrLog, MsgrLogRepo> 
           })
           .onFailure(ApiSvcEx.class).recoverWithUni(throwable -> {
             var apiEx = (ApiSvcEx) throwable;
-            saved.setApiError(apiEx.getJsonResponse(MsgrErrorApiResp.class));
+            Log.error("metaMsgrApiSvc returned an error", apiEx);
+            saved.setApiError(apiEx.getJsonResponse(MsgrErrorApiResp.class).getError());
             log.setDateUpdated(DateUtil.now());
             return repo.update(saved);
           })
