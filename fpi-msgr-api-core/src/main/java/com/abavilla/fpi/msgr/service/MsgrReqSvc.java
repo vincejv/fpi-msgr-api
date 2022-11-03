@@ -51,11 +51,13 @@ public class MsgrReqSvc extends AbsRepoSvc<MsgrMsgReqDto, MsgrLog, MsgrLogRepo> 
         metaMsgrApiSvc.sendMsg(msgReq.getContent(), msgReq.getRecipient())
           .chain(resp-> {
             saved.setMetaMsgId(resp.getMid());
+            log.setDateUpdated(DateUtil.now());
             return repo.update(saved);
           })
           .onFailure(ApiSvcEx.class).recoverWithUni(throwable -> {
             var apiEx = (ApiSvcEx) throwable;
             saved.setApiError(apiEx.getJsonResponse(MsgrErrorApiResp.class));
+            log.setDateUpdated(DateUtil.now());
             return repo.update(saved);
           })
       ).chain(saved -> {
