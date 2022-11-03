@@ -76,4 +76,10 @@ public class MsgrReqSvc extends AbsRepoSvc<MsgrMsgReqDto, MsgrLog, MsgrLogRepo> 
       });
   }
 
+  public Uni<MsgrReqReply> toggleTyping(String recipient, boolean isTyping) {
+    return metaMsgrApiSvc.sendTypingIndicator(recipient, isTyping)
+      .onFailure().recoverWithUni(ex-> Uni.createFrom().failure(
+        new FPISvcEx("Failed to update typing status", ex)));
+  }
+
 }
