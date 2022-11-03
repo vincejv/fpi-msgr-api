@@ -24,6 +24,9 @@ public class MsgrReqSvc extends AbsRepoSvc<MsgrMsgReqDto, MsgrLog, MsgrLogRepo> 
   @Inject
   MetaMsgrApiSvc metaMsgrApiSvc;
 
+  /**
+   * Mapper used for converting between {@link MsgrMsgReqDto} and {@link MsgrLog} entity
+   */
   @Inject
   MsgrMsgReqMapper mapper;
 
