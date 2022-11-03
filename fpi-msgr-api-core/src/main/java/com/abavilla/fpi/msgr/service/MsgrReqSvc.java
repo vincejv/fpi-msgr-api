@@ -1,7 +1,5 @@
 package com.abavilla.fpi.msgr.service;
 
-import java.util.function.Function;
-
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
@@ -53,15 +51,17 @@ public class MsgrReqSvc extends AbsRepoSvc<MsgrMsgReqDto, MsgrLog, MsgrLogRepo> 
         metaMsgrApiSvc.sendMsg(msgReq.getContent(), msgReq.getRecipient())
           .chain(resp-> {
             saved.setMetaMsgId(resp.getMid());
+            log.setDateUpdated(DateUtil.now());
             return repo.update(saved);
           })
           .onFailure(ApiSvcEx.class).recoverWithUni(throwable -> {
             var apiEx = (ApiSvcEx) throwable;
             saved.setApiError(apiEx.getJsonResponse(MsgrErrorApiResp.class));
+            log.setDateUpdated(DateUtil.now());
             return repo.update(saved);
           })
       ).chain(saved -> {
-        if (saved.getApiError() == null || StringUtils.isBlank(saved.getMetaMsgId())) {
+        if (saved.getApiError() != null || StringUtils.isBlank(saved.getMetaMsgId())) {
           throw new FPISvcEx("Failed to send messenger message");
         }
         var reply = new MsgrReqReply();
