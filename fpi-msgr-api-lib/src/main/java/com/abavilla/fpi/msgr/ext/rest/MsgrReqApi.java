@@ -35,7 +35,7 @@ import io.smallrye.mutiny.Uni;
 import org.eclipse.microprofile.rest.client.annotation.RegisterProvider;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
-@RegisterRestClient(configKey = "load-api")
+@RegisterRestClient(configKey = "msgr-api")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 @RegisterProvider(value = ApiRepoExHandler.class)
