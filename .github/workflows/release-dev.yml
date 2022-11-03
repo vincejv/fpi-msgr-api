@@ -158,6 +158,9 @@ jobs:
           env_vars: |
             OIDC_CLIENT_ID=${{ secrets.OIDC_CLIENT_ID }}
             OIDC_AUTH_URL=${{ secrets.OIDC_AUTH_URL }}
+            META_GRAPH_API_BASE_URI=${{ secrets.META_GRAPH_API_BASE_URI }}
+            META_FB_PAGE_ID=${{ secrets.META_FB_PAGE_ID }}
+            META_FB_PAGE_ACCESS_TOKEN=${{ secrets.META_FB_PAGE_ACCESS_TOKEN }}
             DB_NAME=msgr-api-dev
           secrets: |
             MONGO_CONN_STRING=vbl_mongo_connection_string:latest
