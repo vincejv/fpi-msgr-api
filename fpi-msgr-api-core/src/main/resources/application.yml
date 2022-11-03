@@ -32,6 +32,5 @@ quarkus:
 com:
   meta:
     facebook:
-      app-secret: ${META_FB_APP_SECRET:ABCJSOWE1234}
       page-id: ${META_FB_PAGE_ID:ABCJSOWE1234}
       page-access-token: ${META_FB_PAGE_ACCESS_TOKEN:ABCJSOWE1234}

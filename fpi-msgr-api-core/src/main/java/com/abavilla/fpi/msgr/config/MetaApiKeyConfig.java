@@ -27,12 +27,6 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
 @Getter
 public class MetaApiKeyConfig {
 
-  /**
-   * API Key for verification handshake between Meta and FPI
-   */
-  @ConfigProperty(name = "com.meta.facebook.verify-token")
-  String authorizedToken;
-
   @ConfigProperty(name = "com.meta.facebook.page-access-token")
   String pageAccessToken;
 
