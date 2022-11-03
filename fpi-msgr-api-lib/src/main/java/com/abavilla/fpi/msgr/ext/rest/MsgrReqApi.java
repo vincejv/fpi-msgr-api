@@ -29,15 +29,18 @@ import javax.ws.rs.core.MediaType;
 import com.abavilla.fpi.fw.dto.impl.RespDto;
 import com.abavilla.fpi.fw.exceptions.handler.ApiRepoExHandler;
 import com.abavilla.fpi.fw.rest.IApi;
+import com.abavilla.fpi.login.ext.rest.AppToAppPreAuth;
 import com.abavilla.fpi.meta.ext.dto.msgr.MsgrReqReply;
 import com.abavilla.fpi.msgr.ext.dto.MsgrMsgReqDto;
 import io.smallrye.mutiny.Uni;
+import org.eclipse.microprofile.rest.client.annotation.RegisterClientHeaders;
 import org.eclipse.microprofile.rest.client.annotation.RegisterProvider;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
 @RegisterRestClient(configKey = "msgr-api")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
+@RegisterClientHeaders(AppToAppPreAuth.class)
 @RegisterProvider(value = ApiRepoExHandler.class)
 public interface MsgrReqApi extends IApi {
 

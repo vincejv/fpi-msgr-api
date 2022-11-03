@@ -62,10 +62,17 @@
   </properties>
 
   <dependencies>
+
     <dependency>
       <groupId>com.abavilla</groupId>
       <artifactId>fpi-meta-plugin-lib</artifactId>
     </dependency>
+
+    <dependency>
+      <groupId>com.abavilla</groupId>
+      <artifactId>fpi-login-api-lib</artifactId>
+    </dependency>
+
   </dependencies>
   
   <build>
