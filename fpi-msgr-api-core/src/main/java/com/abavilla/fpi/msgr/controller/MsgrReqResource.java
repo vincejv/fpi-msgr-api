@@ -21,6 +21,7 @@ package com.abavilla.fpi.msgr.controller;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 
 import com.abavilla.fpi.fw.controller.AbsBaseResource;
 import com.abavilla.fpi.fw.dto.IDto;
@@ -33,6 +34,7 @@ import com.abavilla.fpi.msgr.entity.MsgrLog;
 import com.abavilla.fpi.msgr.ext.dto.MsgrMsgReqDto;
 import com.abavilla.fpi.msgr.service.MsgrReqSvc;
 import io.smallrye.mutiny.Uni;
+import org.apache.commons.lang3.BooleanUtils;
 import org.jboss.resteasy.reactive.RestResponse;
 import org.jboss.resteasy.reactive.server.ServerExceptionMapper;
 
@@ -47,6 +49,21 @@ public class MsgrReqResource extends AbsBaseResource<MsgrMsgReqDto, MsgrLog, Msg
       resp.setResp(svcResp);
       resp.setTimestamp(DateUtil.nowAsStr());
       resp.setStatus(FWConst.SUCCESS);
+      return resp;
+    });
+  }
+
+  @POST
+  @Path("typing/{recipient}/{isTyping}")
+  public Uni<RespDto<MsgrReqReply>> toggleTyping(
+    @PathParam("recipient") String recipient,
+    @PathParam("isTyping") String isTypingParam) {
+    boolean isTyping = BooleanUtils.toBoolean(isTypingParam);
+    return service.toggleTyping(recipient, isTyping).map(svcResp -> {
+      var resp = new RespDto<MsgrReqReply>();
+      resp.setResp(svcResp);
+      resp.setTimestamp(DateUtil.nowAsStr());
+      resp.setStatus("%s typing indicator for %s".formatted(isTyping ? "Activated" : "Deactivated", recipient));
       return resp;
     });
   }
