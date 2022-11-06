@@ -22,6 +22,7 @@ package com.abavilla.fpi.msgr.mapper;
 
 import com.abavilla.fpi.fw.mapper.IDtoToEntityMapper;
 import com.abavilla.fpi.msgr.entity.MsgrLog;
+import com.abavilla.fpi.msgr.entity.TelegramLog;
 import com.abavilla.fpi.msgr.ext.dto.MsgrMsgReqDto;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
@@ -35,9 +36,10 @@ import org.mapstruct.MappingConstants;
  */
 @Mapper(componentModel = MappingConstants.ComponentModel.CDI,
   injectionStrategy = InjectionStrategy.CONSTRUCTOR)
-public interface MsgrMsgReqMapper extends IDtoToEntityMapper<MsgrMsgReqDto, MsgrLog> {
+public interface TelegramMsgReqMapper extends IDtoToEntityMapper<MsgrMsgReqDto, TelegramLog> {
 
   @Mapping(target = "msgContent", source = "content")
-  MsgrLog mapToEntity(MsgrMsgReqDto dto);
+  @Mapping(target = "chatId", source = "recipient")
+  TelegramLog mapToEntity(MsgrMsgReqDto dto);
 
 }

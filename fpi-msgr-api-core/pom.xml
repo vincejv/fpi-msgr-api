@@ -73,6 +73,11 @@
       <artifactId>fpi-meta-plugin-lib</artifactId>
     </dependency>
 
+    <dependency>
+      <groupId>com.github.pengrad</groupId>
+      <artifactId>java-telegram-bot-api</artifactId>
+    </dependency>
+
   </dependencies>
   <build>
     <plugins>

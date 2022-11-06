@@ -36,3 +36,7 @@ com:
     facebook:
       page-id: ${META_FB_PAGE_ID:ABCJSOWE1234}
       page-access-token: ${META_FB_PAGE_ACCESS_TOKEN:ABCJSOWE1234}
+
+org:
+  telegram:
+    bot-access-token: ${TELEGRAM_SECRET_ACCESS_TOKEN:123456:ABCDEFIE}
