@@ -16,41 +16,58 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.     *
  ******************************************************************************/
 
-package com.abavilla.fpi.msgr.ext.rest;
+package com.abavilla.fpi.msgr.controller;
 
-import javax.ws.rs.Consumes;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 
+import com.abavilla.fpi.fw.controller.AbsBaseResource;
+import com.abavilla.fpi.fw.dto.IDto;
 import com.abavilla.fpi.fw.dto.impl.RespDto;
-import com.abavilla.fpi.fw.exceptions.handler.ApiRepoExHandler;
-import com.abavilla.fpi.fw.rest.IApi;
-import com.abavilla.fpi.login.ext.rest.AppToAppPreAuth;
-import com.abavilla.fpi.meta.ext.dto.msgr.MsgrReqReply;
+import com.abavilla.fpi.fw.exceptions.FPISvcEx;
+import com.abavilla.fpi.fw.util.DateUtil;
+import com.abavilla.fpi.fw.util.FWConst;
+import com.abavilla.fpi.msgr.entity.TelegramLog;
 import com.abavilla.fpi.msgr.ext.dto.MsgrMsgReqDto;
+import com.abavilla.fpi.msgr.service.TelegramReqSvc;
 import io.smallrye.mutiny.Uni;
-import org.eclipse.microprofile.rest.client.annotation.RegisterClientHeaders;
-import org.eclipse.microprofile.rest.client.annotation.RegisterProvider;
-import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
+import org.jboss.resteasy.reactive.RestResponse;
+import org.jboss.resteasy.reactive.server.ServerExceptionMapper;
 
-@RegisterRestClient(configKey = "msgr-api")
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
-@RegisterClientHeaders(AppToAppPreAuth.class)
-@RegisterProvider(value = ApiRepoExHandler.class)
-public interface MsgrReqApi extends IApi {
+@Path("/fpi/telegram")
+public class TelegramReqResource extends AbsBaseResource<MsgrMsgReqDto, TelegramLog, TelegramReqSvc> {
 
   @POST
-  Uni<RespDto<MsgrReqReply>> sendMsg(
-    MsgrMsgReqDto msgReq, @HeaderParam("X-FPI-User") String fpiUser);
+  public Uni<RespDto<IDto>> sendMsg(
+    MsgrMsgReqDto msgReq, @HeaderParam("X-FPI-User") String fpiUser) {
+    return service.postMsg(msgReq, fpiUser).map(svcResp -> {
+      var resp = new RespDto<>();
+      resp.setTimestamp(DateUtil.nowAsStr());
+      resp.setStatus(FWConst.SUCCESS);
+      return resp;
+    });
+  }
 
   @POST
-  @Path("typing/{recipient}/{isTyping}")
-  Uni<RespDto<MsgrReqReply>> toggleTyping(
-    @PathParam("recipient") String recipient, @PathParam("isTyping") Boolean isTypingParam);
+  @Path("typing/{recipient}")
+  public Uni<RespDto<IDto>> toggleTyping(
+    @PathParam("recipient") String recipient) {
+    return service.toggleTyping(recipient).map(svcResp -> {
+      var resp = new RespDto<>();
+      resp.setTimestamp(DateUtil.nowAsStr());
+      resp.setStatus("Toggled typing indicator for %s".formatted(recipient));
+      return resp;
+    });
+  }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  @ServerExceptionMapper
+  protected RestResponse<RespDto<IDto>> mapException(FPISvcEx x) {
+    return super.mapException(x);
+  }
 }

@@ -16,24 +16,18 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.     *
  ******************************************************************************/
 
-package com.abavilla.fpi.msgr.ext.dto;
+package com.abavilla.fpi.msgr.config;
 
-import com.abavilla.fpi.fw.dto.AbsDto;
-import io.quarkus.runtime.annotations.RegisterForReflection;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import javax.enterprise.context.ApplicationScoped;
 
-@Data
-@EqualsAndHashCode(callSuper = true)
-@NoArgsConstructor
-@RegisterForReflection
-public class MsgrMsgReqDto extends AbsDto {
+import lombok.Getter;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 
-  private String content;
+@ApplicationScoped
+@Getter
+public class TelegramApiKeyConfig {
 
-  private String recipient;
-
-  private String replyTo;
+  @ConfigProperty(name = "org.telegram.bot-access-token")
+  String accessToken;
 
 }

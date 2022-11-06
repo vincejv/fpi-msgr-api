@@ -43,8 +43,8 @@ public class MsgrReqResource extends AbsBaseResource<MsgrMsgReqDto, MsgrLog, Msg
 
   @POST
   public Uni<RespDto<MsgrReqReply>> sendMsg(
-    MsgrMsgReqDto msgReq, @HeaderParam("X-FPI-System") String appSource) {
-    return service.postMsg(msgReq, appSource).map(svcResp -> {
+    MsgrMsgReqDto msgReq, @HeaderParam("X-FPI-User") String fpiUser) {
+    return service.postMsg(msgReq, fpiUser).map(svcResp -> {
       var resp = new RespDto<MsgrReqReply>();
       resp.setResp(svcResp);
       resp.setTimestamp(DateUtil.nowAsStr());
