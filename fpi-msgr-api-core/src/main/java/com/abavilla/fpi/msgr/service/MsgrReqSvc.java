@@ -40,13 +40,11 @@ public class MsgrReqSvc extends AbsRepoSvc<MsgrMsgReqDto, MsgrLog, MsgrLogRepo> 
   @Inject
   MetaApiKeyConfig metaApiKeyConfig;
 
-  public Uni<MsgrReqReply> postMsg(MsgrMsgReqDto msgReq, String appSource) {
+  public Uni<MsgrReqReply> postMsg(MsgrMsgReqDto msgReq, String fpiUser) {
     var log = mapper.mapToEntity(msgReq);
-    log.setRecipient(msgReq.getRecipient());
-    log.setMsgContent(msgReq.getContent());
     log.setPageId(metaApiKeyConfig.getPageId());
-    log.setFpiUser(identity.getPrincipal().getName());
-    log.setFpiSystem(appSource);
+    log.setFpiSystem(identity.getPrincipal().getName());
+    log.setFpiUser(fpiUser);
     log.setDateCreated(DateUtil.now());
     log.setDateUpdated(DateUtil.now());
 

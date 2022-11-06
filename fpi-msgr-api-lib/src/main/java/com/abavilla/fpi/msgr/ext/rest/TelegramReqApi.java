@@ -26,31 +26,30 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import com.abavilla.fpi.fw.dto.IDto;
 import com.abavilla.fpi.fw.dto.impl.RespDto;
 import com.abavilla.fpi.fw.exceptions.handler.ApiRepoExHandler;
 import com.abavilla.fpi.fw.rest.IApi;
 import com.abavilla.fpi.login.ext.rest.AppToAppPreAuth;
-import com.abavilla.fpi.meta.ext.dto.msgr.MsgrReqReply;
 import com.abavilla.fpi.msgr.ext.dto.MsgrMsgReqDto;
 import io.smallrye.mutiny.Uni;
 import org.eclipse.microprofile.rest.client.annotation.RegisterClientHeaders;
 import org.eclipse.microprofile.rest.client.annotation.RegisterProvider;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
-@RegisterRestClient(configKey = "msgr-api")
+@RegisterRestClient(configKey = "telegram-api")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 @RegisterClientHeaders(AppToAppPreAuth.class)
 @RegisterProvider(value = ApiRepoExHandler.class)
-public interface MsgrReqApi extends IApi {
+public interface TelegramReqApi extends IApi {
 
   @POST
-  Uni<RespDto<MsgrReqReply>> sendMsg(
+  Uni<RespDto<IDto>> sendMsg(
     MsgrMsgReqDto msgReq, @HeaderParam("X-FPI-User") String fpiUser);
 
   @POST
-  @Path("typing/{recipient}/{isTyping}")
-  Uni<RespDto<MsgrReqReply>> toggleTyping(
-    @PathParam("recipient") String recipient, @PathParam("isTyping") Boolean isTypingParam);
+  @Path("typing/{recipient}")
+  Uni<RespDto<IDto>> toggleTyping(@PathParam("recipient") String recipient);
 
 }

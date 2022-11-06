@@ -201,12 +201,13 @@ jobs:
           project_id: ${{ env.PROJECT_ID }}
           flags: --cpu ${{ env.SERVICE_CPU }} --memory ${{ env.SERVICE_MEMORY }} --cpu-throttling
           env_vars: |
+            DB_NAME=msgr-api-prod
             OIDC_CLIENT_ID=${{ secrets.OIDC_CLIENT_ID }}
             OIDC_AUTH_URL=${{ secrets.OIDC_AUTH_URL }}
             META_GRAPH_API_BASE_URI=${{ secrets.META_GRAPH_API_BASE_URI }}
             META_FB_PAGE_ID=${{ secrets.META_FB_PAGE_ID }}
             META_FB_PAGE_ACCESS_TOKEN=${{ secrets.META_FB_PAGE_ACCESS_TOKEN }}
-            DB_NAME=msgr-api-prod
+            TELEGRAM_SECRET_ACCESS_TOKEN=${{ secrets.TELEGRAM_SECRET_ACCESS_TOKEN }}
           secrets: |
             MONGO_CONN_STRING=vbl_mongo_connection_string:latest
             OIDC_SECRET=oidc_secret_keycloak:latest
