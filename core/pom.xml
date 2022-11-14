@@ -41,18 +41,18 @@
     <tag>HEAD</tag>
   </scm>
 
-  <name>FPI Messenger API shared library</name>
+  <name>FPI Messenger API core module</name>
   <description>Reactive backend REST api for integrating with Meta Messenger Graph API</description>
   <url>https://github.com/vincejv/fpi-msgr-api</url>
   <inceptionYear>2022</inceptionYear>
 
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>fpi-msgr-api-lib</artifactId>
+  <artifactId>fpi-msgr-api-core</artifactId>
   <version>0</version>
 
   <parent>
     <groupId>com.abavilla</groupId>
-    <artifactId>fpi-msgr-api</artifactId>
+    <artifactId>fpi-msgr-api-parent</artifactId>
     <version>0</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
@@ -65,20 +65,36 @@
 
     <dependency>
       <groupId>com.abavilla</groupId>
-      <artifactId>fpi-meta-plugin-lib</artifactId>
+      <artifactId>fpi-msgr-api</artifactId>
     </dependency>
 
     <dependency>
       <groupId>com.abavilla</groupId>
-      <artifactId>fpi-login-api-lib</artifactId>
+      <artifactId>fpi-meta-plugin</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.github.pengrad</groupId>
+      <artifactId>java-telegram-bot-api</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.abavilla</groupId>
+      <artifactId>fpi-viber-plugin</artifactId>
     </dependency>
 
   </dependencies>
-  
+
   <build>
     <plugins>
 
       <plugin>
+        <groupId>${quarkus.platform.group-id}</groupId>
+        <artifactId>quarkus-maven-plugin</artifactId>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
       </plugin>
 
@@ -88,13 +104,16 @@
       </plugin>
 
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
       </plugin>
 
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-failsafe-plugin</artifactId>
       </plugin>
 
     </plugins>
   </build>
+
 </project>
