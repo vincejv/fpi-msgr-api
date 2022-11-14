@@ -78,6 +78,11 @@
       <artifactId>java-telegram-bot-api</artifactId>
     </dependency>
 
+    <dependency>
+      <groupId>com.abavilla</groupId>
+      <artifactId>fpi-viber-plugin-lib</artifactId>
+    </dependency>
+
   </dependencies>
   <build>
     <plugins>

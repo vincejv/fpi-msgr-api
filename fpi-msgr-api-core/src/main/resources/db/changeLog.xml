@@ -28,4 +28,15 @@
 
   </changeSet>
 
+  <changeSet id="3" author="vincejv" labels="viber_api" context="main">
+    <comment>added telegram schema</comment>
+    <ext:createCollection collectionName="viber_log"/>
+
+    <ext:createIndex collectionName="viber_log">
+      <ext:keys>{receiver: 1, msgToken: 1}</ext:keys>
+      <ext:options>{ unique: true, name: "receiverMsgToken", partialFilterExpression: { receiver: { $exists: true }, msgToken: { $exists: true } } }</ext:options>
+    </ext:createIndex>
+
+  </changeSet>
+
 </databaseChangeLog>

@@ -18,40 +18,24 @@
 
 package com.abavilla.fpi.msgr.controller;
 
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 
 import com.abavilla.fpi.fw.dto.IDto;
 import com.abavilla.fpi.fw.dto.impl.RespDto;
 import com.abavilla.fpi.fw.exceptions.FPISvcEx;
-import com.abavilla.fpi.fw.util.DateUtil;
-import com.abavilla.fpi.msgr.config.TelegramApiKeyConfig;
-import com.abavilla.fpi.msgr.entity.TelegramLog;
-import com.abavilla.fpi.msgr.mapper.TelegramMsgReqMapper;
-import com.abavilla.fpi.msgr.repo.TelegramLogRepo;
-import com.abavilla.fpi.msgr.service.TelegramReqSvc;
-import com.pengrad.telegrambot.response.SendResponse;
-import io.smallrye.mutiny.Uni;
+import com.abavilla.fpi.msgr.config.ViberApiKeyConfig;
+import com.abavilla.fpi.msgr.entity.ViberLog;
+import com.abavilla.fpi.msgr.mapper.ViberMsgReqMapper;
+import com.abavilla.fpi.msgr.repo.ViberLogRepo;
+import com.abavilla.fpi.msgr.service.ViberReqSvc;
+import com.abavilla.fpi.viber.ext.dto.SendResponse;
 import org.jboss.resteasy.reactive.RestResponse;
 import org.jboss.resteasy.reactive.server.ServerExceptionMapper;
 
-@Path("/fpi/telegram")
-public class TelegramReqResource
-  extends MsgReqResource<SendResponse, TelegramLog, TelegramLogRepo, TelegramMsgReqMapper,
-  TelegramApiKeyConfig, TelegramReqSvc> {
-
-  @POST
-  @Path("typing/{recipient}")
-  public Uni<RespDto<IDto>> toggleTyping(
-    @PathParam("recipient") String recipient) {
-    return service.toggleTyping(recipient).map(svcResp -> {
-      var resp = new RespDto<>();
-      resp.setTimestamp(DateUtil.nowAsStr());
-      resp.setStatus("Toggled typing indicator for %s".formatted(recipient));
-      return resp;
-    });
-  }
+@Path("/fpi/viber")
+public class ViberReqResource
+  extends MsgReqResource<SendResponse, ViberLog, ViberLogRepo, ViberMsgReqMapper,
+  ViberApiKeyConfig, ViberReqSvc> {
 
   /**
    * {@inheritDoc}

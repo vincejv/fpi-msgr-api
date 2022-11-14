@@ -208,6 +208,8 @@ jobs:
             META_FB_PAGE_ID=${{ secrets.META_FB_PAGE_ID }}
             META_FB_PAGE_ACCESS_TOKEN=${{ secrets.META_FB_PAGE_ACCESS_TOKEN }}
             TELEGRAM_SECRET_ACCESS_TOKEN=${{ secrets.TELEGRAM_SECRET_ACCESS_TOKEN }}
+            VIBER_API_BASE_URI=${{ secrets.VIBER_API_BASE_URI }}
+            VIBER_AUTH_TOKEN=${{ secrets.VIBER_AUTH_TOKEN }}
           secrets: |
             MONGO_CONN_STRING=vbl_mongo_connection_string:latest
             OIDC_SECRET=oidc_secret_keycloak:latest
