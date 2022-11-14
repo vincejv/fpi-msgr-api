@@ -3,12 +3,9 @@ package com.abavilla.fpi.msgr.service;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 
-import com.abavilla.fpi.fw.service.AbsRepoSvc;
 import com.abavilla.fpi.fw.util.DateUtil;
 import com.abavilla.fpi.msgr.config.TelegramApiKeyConfig;
-import com.abavilla.fpi.msgr.entity.MsgrLog;
 import com.abavilla.fpi.msgr.entity.TelegramLog;
 import com.abavilla.fpi.msgr.ext.dto.MsgrMsgReqDto;
 import com.abavilla.fpi.msgr.mapper.TelegramMsgReqMapper;
@@ -20,28 +17,13 @@ import com.pengrad.telegrambot.request.SendChatAction;
 import com.pengrad.telegrambot.request.SendMessage;
 import com.pengrad.telegrambot.response.BaseResponse;
 import com.pengrad.telegrambot.response.SendResponse;
-import io.quarkus.security.identity.SecurityIdentity;
 import io.smallrye.mutiny.Uni;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 
 @ApplicationScoped
-public class TelegramReqSvc extends AbsRepoSvc<MsgrMsgReqDto, TelegramLog, TelegramLogRepo> {
-
-  @Inject
-  TelegramApiKeyConfig apiKeyConfig;
-
-  /**
-   * Mapper used for converting between {@link MsgrMsgReqDto} and {@link MsgrLog} entity
-   */
-  @Inject
-  TelegramMsgReqMapper mapper;
-
-  /**
-   * OIDC Identity provider
-   */
-  @Inject
-  SecurityIdentity identity;
+public class TelegramReqSvc extends MsgReqSvc<
+  SendResponse, TelegramLog, TelegramLogRepo, TelegramMsgReqMapper, TelegramApiKeyConfig> {
 
   TelegramBot telegramBot;
 
