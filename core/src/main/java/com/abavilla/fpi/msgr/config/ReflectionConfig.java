@@ -51,6 +51,10 @@ import com.pengrad.telegrambot.model.DeleteMyCommands;
 import com.pengrad.telegrambot.model.Dice;
 import com.pengrad.telegrambot.model.Document;
 import com.pengrad.telegrambot.model.File;
+import com.pengrad.telegrambot.model.ForumTopic;
+import com.pengrad.telegrambot.model.ForumTopicClosed;
+import com.pengrad.telegrambot.model.ForumTopicCreated;
+import com.pengrad.telegrambot.model.ForumTopicReopened;
 import com.pengrad.telegrambot.model.Game;
 import com.pengrad.telegrambot.model.GameHighScore;
 import com.pengrad.telegrambot.model.InlineQuery;
@@ -128,6 +132,7 @@ import com.pengrad.telegrambot.model.request.InlineQueryResultVenue;
 import com.pengrad.telegrambot.model.request.InlineQueryResultVideo;
 import com.pengrad.telegrambot.model.request.InlineQueryResultVoice;
 import com.pengrad.telegrambot.model.request.InputContactMessageContent;
+import com.pengrad.telegrambot.model.request.InputFile;
 import com.pengrad.telegrambot.model.request.InputInvoiceMessageContent;
 import com.pengrad.telegrambot.model.request.InputLocationMessageContent;
 import com.pengrad.telegrambot.model.request.InputMedia;
@@ -186,18 +191,22 @@ import com.pengrad.telegrambot.request.BanChatMember;
 import com.pengrad.telegrambot.request.BanChatSenderChat;
 import com.pengrad.telegrambot.request.BaseRequest;
 import com.pengrad.telegrambot.request.Close;
+import com.pengrad.telegrambot.request.CloseForumTopic;
 import com.pengrad.telegrambot.request.ContentTypes;
 import com.pengrad.telegrambot.request.CopyMessage;
 import com.pengrad.telegrambot.request.CreateChatInviteLink;
+import com.pengrad.telegrambot.request.CreateForumTopic;
 import com.pengrad.telegrambot.request.CreateInvoiceLink;
 import com.pengrad.telegrambot.request.CreateNewStickerSet;
 import com.pengrad.telegrambot.request.DeclineChatJoinRequest;
 import com.pengrad.telegrambot.request.DeleteChatPhoto;
 import com.pengrad.telegrambot.request.DeleteChatStickerSet;
+import com.pengrad.telegrambot.request.DeleteForumTopic;
 import com.pengrad.telegrambot.request.DeleteMessage;
 import com.pengrad.telegrambot.request.DeleteStickerFromSet;
 import com.pengrad.telegrambot.request.DeleteWebhook;
 import com.pengrad.telegrambot.request.EditChatInviteLink;
+import com.pengrad.telegrambot.request.EditForumTopic;
 import com.pengrad.telegrambot.request.EditMessageCaption;
 import com.pengrad.telegrambot.request.EditMessageLiveLocation;
 import com.pengrad.telegrambot.request.EditMessageMedia;
@@ -212,6 +221,7 @@ import com.pengrad.telegrambot.request.GetChatMemberCount;
 import com.pengrad.telegrambot.request.GetChatMenuButton;
 import com.pengrad.telegrambot.request.GetCustomEmojiStickers;
 import com.pengrad.telegrambot.request.GetFile;
+import com.pengrad.telegrambot.request.GetForumTopicIconStickers;
 import com.pengrad.telegrambot.request.GetGameHighScores;
 import com.pengrad.telegrambot.request.GetMe;
 import com.pengrad.telegrambot.request.GetMyCommands;
@@ -224,6 +234,7 @@ import com.pengrad.telegrambot.request.LeaveChat;
 import com.pengrad.telegrambot.request.LogOut;
 import com.pengrad.telegrambot.request.PinChatMessage;
 import com.pengrad.telegrambot.request.PromoteChatMember;
+import com.pengrad.telegrambot.request.ReopenForumTopic;
 import com.pengrad.telegrambot.request.RestrictChatMember;
 import com.pengrad.telegrambot.request.RevokeChatInviteLink;
 import com.pengrad.telegrambot.request.SendAnimation;
@@ -262,10 +273,12 @@ import com.pengrad.telegrambot.request.StopPoll;
 import com.pengrad.telegrambot.request.UnbanChatMember;
 import com.pengrad.telegrambot.request.UnbanChatSenderChat;
 import com.pengrad.telegrambot.request.UnpinAllChatMessages;
+import com.pengrad.telegrambot.request.UnpinAllForumTopicMessages;
 import com.pengrad.telegrambot.request.UnpinChatMessage;
 import com.pengrad.telegrambot.request.UploadStickerFile;
 import com.pengrad.telegrambot.response.BaseResponse;
 import com.pengrad.telegrambot.response.ChatInviteLinkResponse;
+import com.pengrad.telegrambot.response.CreateForumTopicResponse;
 import com.pengrad.telegrambot.response.GetChatAdministratorsResponse;
 import com.pengrad.telegrambot.response.GetChatMemberCountResponse;
 import com.pengrad.telegrambot.response.GetChatMemberResponse;
@@ -273,6 +286,7 @@ import com.pengrad.telegrambot.response.GetChatMenuButtonResponse;
 import com.pengrad.telegrambot.response.GetChatResponse;
 import com.pengrad.telegrambot.response.GetCustomEmojiStickersResponse;
 import com.pengrad.telegrambot.response.GetFileResponse;
+import com.pengrad.telegrambot.response.GetForumTopicIconStickersResponse;
 import com.pengrad.telegrambot.response.GetGameHighScoresResponse;
 import com.pengrad.telegrambot.response.GetMeResponse;
 import com.pengrad.telegrambot.response.GetMyCommandsResponse;
@@ -585,6 +599,23 @@ import io.quarkus.runtime.annotations.RegisterForReflection;
 
   // Telegram Models - misc
   AttachName.class,
+
+  // Telegram v6.3 API
+  InputFile.class,
+  ForumTopic.class,
+  ForumTopicClosed.class,
+  ForumTopicCreated.class,
+  ForumTopicReopened.class,
+  CloseForumTopic.class,
+  CreateForumTopic.class,
+  DeleteForumTopic.class,
+  EditForumTopic.class,
+  GetForumTopicIconStickers.class,
+  ReopenForumTopic.class,
+  UnpinAllForumTopicMessages.class,
+  CreateForumTopicResponse.class,
+  GetForumTopicIconStickersResponse.class,
+
 
 }, ignoreNested = false)
 public class ReflectionConfig extends BaseReflectionConfig {
