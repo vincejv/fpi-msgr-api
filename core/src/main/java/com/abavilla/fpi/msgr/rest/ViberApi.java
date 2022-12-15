@@ -17,6 +17,7 @@
 package com.abavilla.fpi.msgr.rest;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -27,6 +28,7 @@ import com.abavilla.fpi.fw.exceptions.handler.ApiRepoExHandler;
 import com.abavilla.fpi.fw.rest.IApi;
 import com.abavilla.fpi.viber.ext.dto.MessageRequest;
 import com.abavilla.fpi.viber.ext.dto.SendResponse;
+import com.abavilla.fpi.viber.ext.dto.Sender;
 import io.smallrye.mutiny.Uni;
 import org.eclipse.microprofile.rest.client.annotation.RegisterProvider;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
@@ -37,10 +39,18 @@ import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 @RegisterProvider(value = ApiRepoExHandler.class)
 public interface ViberApi extends IApi {
 
-  @Path("send_message")
   @POST
-  Uni<SendResponse> sendMessage(MessageRequest message,
-                                @HeaderParam("X-Viber-Auth-Token") String authToken);
+  @Path("send_message")
+  Uni<SendResponse> sendMessage(
+    MessageRequest message,
+    @HeaderParam("X-Viber-Auth-Token") String authToken
+  );
 
+  @GET
+  @Path("get_user_details")
+  Uni<SendResponse> getUserDtls(
+    Sender userReq,
+    @HeaderParam("X-Viber-Auth-Token") String authToken
+  );
 
 }

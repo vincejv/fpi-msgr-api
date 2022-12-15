@@ -73,6 +73,11 @@
       <artifactId>fpi-login-api</artifactId>
     </dependency>
 
+    <dependency>
+      <groupId>com.abavilla</groupId>
+      <artifactId>fpi-viber-plugin</artifactId>
+    </dependency>
+
   </dependencies>
   
   <build>

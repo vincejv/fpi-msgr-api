@@ -18,17 +18,22 @@
 
 package com.abavilla.fpi.msgr.controller;
 
+import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 
 import com.abavilla.fpi.fw.dto.IDto;
 import com.abavilla.fpi.fw.dto.impl.RespDto;
 import com.abavilla.fpi.fw.exceptions.FPISvcEx;
+import com.abavilla.fpi.fw.util.DateUtil;
 import com.abavilla.fpi.msgr.config.ViberApiKeyConfig;
 import com.abavilla.fpi.msgr.entity.ViberLog;
 import com.abavilla.fpi.msgr.mapper.ViberMsgReqMapper;
 import com.abavilla.fpi.msgr.repo.ViberLogRepo;
 import com.abavilla.fpi.msgr.service.ViberReqSvc;
 import com.abavilla.fpi.viber.ext.dto.SendResponse;
+import io.smallrye.mutiny.Uni;
 import org.jboss.resteasy.reactive.RestResponse;
 import org.jboss.resteasy.reactive.server.ServerExceptionMapper;
 
@@ -36,6 +41,20 @@ import org.jboss.resteasy.reactive.server.ServerExceptionMapper;
 public class ViberReqResource
   extends MsgReqResource<SendResponse, ViberLog, ViberLogRepo, ViberMsgReqMapper,
   ViberApiKeyConfig, ViberReqSvc> {
+
+  @GET
+  @Path("u/{id}")
+  public Uni<RespDto<SendResponse>> getUserDtls(
+    @PathParam("id") String userId, @HeaderParam("X-FPI-User") String fpiUser
+  ) {
+    return service.getUserDtls(userId).map(svcResp -> {
+      var resp = new RespDto<SendResponse>();
+      resp.setResp(svcResp);
+      resp.setTimestamp(DateUtil.nowAsStr());
+      resp.setStatus("Retrieved viber user details");
+      return resp;
+    });
+  }
 
   /**
    * {@inheritDoc}

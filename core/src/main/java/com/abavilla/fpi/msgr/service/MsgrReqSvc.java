@@ -7,6 +7,7 @@ import com.abavilla.fpi.fw.exceptions.ApiSvcEx;
 import com.abavilla.fpi.fw.exceptions.FPISvcEx;
 import com.abavilla.fpi.fw.service.AbsRepoSvc;
 import com.abavilla.fpi.fw.util.DateUtil;
+import com.abavilla.fpi.meta.ext.dto.ProfileReqReply;
 import com.abavilla.fpi.meta.ext.dto.msgr.MsgrReqReply;
 import com.abavilla.fpi.msgr.config.MetaApiKeyConfig;
 import com.abavilla.fpi.msgr.entity.MsgrErrorApiResp;
@@ -78,6 +79,10 @@ public class MsgrReqSvc extends AbsRepoSvc<MsgrMsgReqDto, MsgrLog, MsgrLogRepo> 
     return metaMsgrApiSvc.sendTypingIndicator(recipient, isTyping)
       .onFailure().recoverWithUni(ex-> Uni.createFrom().failure(
         new FPISvcEx("Failed to update typing status", ex)));
+  }
+
+  public Uni<ProfileReqReply> getUserDtls(String userId) {
+    return metaMsgrApiSvc.getUserDtls(userId);
   }
 
 }

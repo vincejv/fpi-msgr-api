@@ -21,8 +21,11 @@ package com.abavilla.fpi.msgr.ext.rest;
 import java.time.temporal.ChronoUnit;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -33,6 +36,7 @@ import com.abavilla.fpi.fw.rest.IApi;
 import com.abavilla.fpi.login.ext.rest.AppToAppPreAuth;
 import com.abavilla.fpi.meta.ext.dto.msgr.MsgrReqReply;
 import com.abavilla.fpi.msgr.ext.dto.MsgrMsgReqDto;
+import com.abavilla.fpi.viber.ext.dto.SendResponse;
 import io.smallrye.faulttolerance.api.ExponentialBackoff;
 import io.smallrye.mutiny.Uni;
 import org.eclipse.microprofile.faulttolerance.Retry;
@@ -52,6 +56,13 @@ public interface ViberReqApi extends IApi {
 
   @POST
   Uni<RespDto<MsgrReqReply>> sendMsg(
-    MsgrMsgReqDto msgReq, @HeaderParam("X-FPI-User") String fpiUser);
+    MsgrMsgReqDto msgReq, @HeaderParam("X-FPI-User") String fpiUser
+  );
+
+  @GET
+  @Path("u/{id}")
+  Uni<RespDto<SendResponse>> getUserDtls(
+    @PathParam("id") String userId, @HeaderParam("X-FPI-User") String fpiUser
+  );
 
 }
