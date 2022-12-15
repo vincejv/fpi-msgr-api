@@ -21,6 +21,7 @@ package com.abavilla.fpi.msgr.ext.rest;
 import java.time.temporal.ChronoUnit;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -33,6 +34,7 @@ import com.abavilla.fpi.fw.exceptions.AuthApiSvcEx;
 import com.abavilla.fpi.fw.exceptions.handler.ApiRepoExHandler;
 import com.abavilla.fpi.fw.rest.IApi;
 import com.abavilla.fpi.login.ext.rest.AppToAppPreAuth;
+import com.abavilla.fpi.meta.ext.dto.ProfileReqReply;
 import com.abavilla.fpi.meta.ext.dto.msgr.MsgrReqReply;
 import com.abavilla.fpi.msgr.ext.dto.MsgrMsgReqDto;
 import io.smallrye.faulttolerance.api.ExponentialBackoff;
@@ -54,11 +56,19 @@ public interface MsgrReqApi extends IApi {
 
   @POST
   Uni<RespDto<MsgrReqReply>> sendMsg(
-    MsgrMsgReqDto msgReq, @HeaderParam("X-FPI-User") String fpiUser);
+    MsgrMsgReqDto msgReq, @HeaderParam("X-FPI-User") String fpiUser
+  );
 
   @POST
   @Path("typing/{recipient}/{isTyping}")
   Uni<RespDto<MsgrReqReply>> toggleTyping(
-    @PathParam("recipient") String recipient, @PathParam("isTyping") Boolean isTypingParam);
+    @PathParam("recipient") String recipient, @PathParam("isTyping") Boolean isTypingParam
+  );
+
+  @GET
+  @Path("u/{id}")
+  Uni<RespDto<ProfileReqReply>> getUserDtls(
+    @PathParam("id") String userId, @HeaderParam("X-FPI-User") String fpiUser
+  );
 
 }

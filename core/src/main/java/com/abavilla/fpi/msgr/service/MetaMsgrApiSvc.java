@@ -23,6 +23,7 @@ import javax.inject.Inject;
 
 import com.abavilla.fpi.fw.exceptions.FPISvcEx;
 import com.abavilla.fpi.fw.rest.AbsApiSvc;
+import com.abavilla.fpi.meta.ext.dto.ProfileReqReply;
 import com.abavilla.fpi.meta.ext.dto.msgr.MsgDtlDto;
 import com.abavilla.fpi.meta.ext.dto.msgr.MsgrReqReply;
 import com.abavilla.fpi.meta.ext.dto.msgr.ProfileDto;
@@ -63,6 +64,11 @@ public class MetaMsgrApiSvc extends AbsApiSvc<MetaGraphApi> {
       "RESPONSE",
       metaApiKeyConfig.getPageAccessToken()
     ).map(this::mapResponse);
+  }
+
+  public Uni<ProfileReqReply> getUserDtls(String userId) {
+    return client.getProfile(userId, "name,profile_pic", metaApiKeyConfig.getPageAccessToken())
+      .map(RestResponse::getEntity);
   }
 
   private MsgrReqReply mapResponse(RestResponse<MsgrReqReply> resp) {

@@ -18,6 +18,7 @@
 
 package com.abavilla.fpi.msgr.controller;
 
+import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -29,6 +30,7 @@ import com.abavilla.fpi.fw.dto.impl.RespDto;
 import com.abavilla.fpi.fw.exceptions.FPISvcEx;
 import com.abavilla.fpi.fw.util.DateUtil;
 import com.abavilla.fpi.fw.util.FWConst;
+import com.abavilla.fpi.meta.ext.dto.ProfileReqReply;
 import com.abavilla.fpi.meta.ext.dto.msgr.MsgrReqReply;
 import com.abavilla.fpi.msgr.entity.MsgrLog;
 import com.abavilla.fpi.msgr.ext.dto.MsgrMsgReqDto;
@@ -64,6 +66,20 @@ public class MsgrReqResource extends AbsBaseResource<MsgrMsgReqDto, MsgrLog, Msg
       resp.setResp(svcResp);
       resp.setTimestamp(DateUtil.nowAsStr());
       resp.setStatus("%s typing indicator for %s".formatted(isTyping ? "Activated" : "Deactivated", recipient));
+      return resp;
+    });
+  }
+
+  @GET
+  @Path("u/{id}")
+  public Uni<RespDto<ProfileReqReply>> getUserDtls(
+    @PathParam("id") String userId, @HeaderParam("X-FPI-User") String fpiUser
+  ) {
+    return service.getUserDtls(userId).map(svcResp -> {
+      var resp = new RespDto<ProfileReqReply>();
+      resp.setResp(svcResp);
+      resp.setTimestamp(DateUtil.nowAsStr());
+      resp.setStatus("Retrieved meta user details");
       return resp;
     });
   }

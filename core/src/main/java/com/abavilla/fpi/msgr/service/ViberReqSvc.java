@@ -10,6 +10,7 @@ import com.abavilla.fpi.msgr.mapper.ViberMsgReqMapper;
 import com.abavilla.fpi.msgr.repo.ViberLogRepo;
 import com.abavilla.fpi.msgr.rest.ViberApi;
 import com.abavilla.fpi.viber.ext.dto.SendResponse;
+import com.abavilla.fpi.viber.ext.dto.Sender;
 import io.smallrye.mutiny.Uni;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
@@ -37,6 +38,12 @@ public class ViberReqSvc extends MsgReqSvc<SendResponse,
         return repo.update(savedLog).replaceWith(() -> resp);
       })
     );
+  }
+
+  public Uni<SendResponse> getUserDtls(String userId) {
+    var profileReq = new Sender();
+    profileReq.setId(userId);
+    return api.getUserDtls(profileReq, apiKeyConfig.getAuthToken());
   }
 
 }
