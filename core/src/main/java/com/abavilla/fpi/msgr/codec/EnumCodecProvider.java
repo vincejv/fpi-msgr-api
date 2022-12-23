@@ -18,7 +18,7 @@
 
 package com.abavilla.fpi.msgr.codec;
 
-import com.abavilla.fpi.fw.config.codec.IEnumCodecProvider;
+import com.abavilla.fpi.fw.codec.IEnumCodecProvider;
 import com.abavilla.fpi.viber.ext.codec.MessageTypeCodec;
 import com.abavilla.fpi.viber.ext.dto.Message;
 import org.bson.codecs.Codec;
