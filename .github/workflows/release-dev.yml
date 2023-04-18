@@ -106,7 +106,7 @@ jobs:
 
       - name: Google Auth
         id: gcp-auth
-        uses: google-github-actions/auth@v0
+        uses: google-github-actions/auth@v1
         with:
           token_format: 'access_token'
           workload_identity_provider: '${{ secrets.WIF_PROVIDER }}'
@@ -137,7 +137,7 @@ jobs:
           images: ${{ steps.image_version.outputs.service_image_path }}
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           context: .
           file: Dockerfile.dev
@@ -148,7 +148,7 @@ jobs:
 
       - name: Deploy to cloud run
         id: deploy
-        uses: google-github-actions/deploy-cloudrun@v0
+        uses: google-github-actions/deploy-cloudrun@v1
         with:
           service: ${{ env.SERVICE }}
           region: ${{ env.REGION }}
