@@ -18,9 +18,6 @@
 
 package com.abavilla.fpi.msgr.controller;
 
-import javax.ws.rs.HeaderParam;
-import javax.ws.rs.POST;
-
 import com.abavilla.fpi.fw.controller.AbsBaseResource;
 import com.abavilla.fpi.fw.dto.IDto;
 import com.abavilla.fpi.fw.dto.impl.RespDto;
@@ -32,6 +29,8 @@ import com.abavilla.fpi.fw.util.FWConst;
 import com.abavilla.fpi.msgr.ext.dto.MsgrMsgReqDto;
 import com.abavilla.fpi.msgr.service.MsgReqSvc;
 import io.smallrye.mutiny.Uni;
+import jakarta.ws.rs.HeaderParam;
+import jakarta.ws.rs.POST;
 
 public abstract class MsgReqResource<Q, I extends AbsItem, R extends AbsMongoRepo<I>, M extends IMapper, K, S extends
   MsgReqSvc<Q, I, R, M, K>> extends AbsBaseResource<MsgrMsgReqDto, I, S> {

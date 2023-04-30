@@ -18,10 +18,9 @@
 
 package com.abavilla.fpi.msgr.repo;
 
-import javax.enterprise.context.ApplicationScoped;
-
 import com.abavilla.fpi.fw.repo.AbsMongoRepo;
 import com.abavilla.fpi.msgr.entity.ViberLog;
+import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class ViberLogRepo extends AbsMongoRepo<ViberLog> {

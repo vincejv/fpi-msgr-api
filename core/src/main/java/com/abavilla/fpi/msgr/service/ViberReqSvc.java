@@ -1,7 +1,5 @@
 package com.abavilla.fpi.msgr.service;
 
-import javax.enterprise.context.ApplicationScoped;
-
 import com.abavilla.fpi.fw.util.DateUtil;
 import com.abavilla.fpi.msgr.config.ViberApiKeyConfig;
 import com.abavilla.fpi.msgr.entity.ViberLog;
@@ -12,6 +10,7 @@ import com.abavilla.fpi.msgr.rest.ViberApi;
 import com.abavilla.fpi.viber.ext.dto.SendResponse;
 import com.abavilla.fpi.viber.ext.dto.Sender;
 import io.smallrye.mutiny.Uni;
+import jakarta.enterprise.context.ApplicationScoped;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 @ApplicationScoped

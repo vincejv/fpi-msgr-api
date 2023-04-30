@@ -1,8 +1,5 @@
 package com.abavilla.fpi.msgr.service;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-
 import com.abavilla.fpi.fw.exceptions.ApiSvcEx;
 import com.abavilla.fpi.fw.exceptions.FPISvcEx;
 import com.abavilla.fpi.fw.service.AbsRepoSvc;
@@ -18,6 +15,8 @@ import com.abavilla.fpi.msgr.repo.MsgrLogRepo;
 import io.quarkus.logging.Log;
 import io.quarkus.security.identity.SecurityIdentity;
 import io.smallrye.mutiny.Uni;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import org.apache.commons.lang3.StringUtils;
 
 @ApplicationScoped

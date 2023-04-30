@@ -18,10 +18,6 @@
 
 package com.abavilla.fpi.msgr.controller;
 
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-
 import com.abavilla.fpi.fw.dto.IDto;
 import com.abavilla.fpi.fw.dto.impl.RespDto;
 import com.abavilla.fpi.fw.exceptions.FPISvcEx;
@@ -33,6 +29,9 @@ import com.abavilla.fpi.msgr.repo.TelegramLogRepo;
 import com.abavilla.fpi.msgr.service.TelegramReqSvc;
 import com.pengrad.telegrambot.response.SendResponse;
 import io.smallrye.mutiny.Uni;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import org.jboss.resteasy.reactive.RestResponse;
 import org.jboss.resteasy.reactive.server.ServerExceptionMapper;
 
