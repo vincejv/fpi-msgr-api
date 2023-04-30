@@ -1,9 +1,5 @@
 package com.abavilla.fpi.msgr.service;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import javax.enterprise.context.ApplicationScoped;
-
 import com.abavilla.fpi.fw.util.DateUtil;
 import com.abavilla.fpi.msgr.config.TelegramApiKeyConfig;
 import com.abavilla.fpi.msgr.entity.TelegramLog;
@@ -18,6 +14,9 @@ import com.pengrad.telegrambot.request.SendMessage;
 import com.pengrad.telegrambot.response.BaseResponse;
 import com.pengrad.telegrambot.response.SendResponse;
 import io.smallrye.mutiny.Uni;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+import jakarta.enterprise.context.ApplicationScoped;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 

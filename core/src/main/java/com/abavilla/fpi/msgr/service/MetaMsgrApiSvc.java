@@ -18,9 +18,6 @@
 
 package com.abavilla.fpi.msgr.service;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-
 import com.abavilla.fpi.fw.exceptions.FPISvcEx;
 import com.abavilla.fpi.fw.rest.AbsApiSvc;
 import com.abavilla.fpi.meta.ext.dto.ProfileReqReply;
@@ -31,6 +28,8 @@ import com.abavilla.fpi.msgr.config.MetaApiKeyConfig;
 import com.abavilla.fpi.msgr.entity.enums.SenderAction;
 import com.abavilla.fpi.msgr.rest.MetaGraphApi;
 import io.smallrye.mutiny.Uni;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import org.jboss.resteasy.reactive.RestResponse;
 
 @ApplicationScoped

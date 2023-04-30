@@ -1,8 +1,5 @@
 package com.abavilla.fpi.msgr.service;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-
 import com.abavilla.fpi.fw.entity.AbsItem;
 import com.abavilla.fpi.fw.mapper.IMapper;
 import com.abavilla.fpi.fw.repo.AbsMongoRepo;
@@ -10,6 +7,8 @@ import com.abavilla.fpi.fw.service.AbsRepoSvc;
 import com.abavilla.fpi.msgr.ext.dto.MsgrMsgReqDto;
 import io.quarkus.security.identity.SecurityIdentity;
 import io.smallrye.mutiny.Uni;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 @ApplicationScoped
 public abstract class
