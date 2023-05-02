@@ -19,10 +19,10 @@ quarkus:
     read-timeout: 120000
     meta-graph-api:
       url: ${META_GRAPH_API_BASE_URI}
-      scope: javax.inject.Singleton
+      scope: jakarta.inject.Singleton
     viber-api:
       url: ${VIBER_API_BASE_URI}
-      scope: javax.inject.Singleton
+      scope: jakarta.inject.Singleton
   oidc:
     auth-server-url: ${OIDC_AUTH_URL:https://localhost:8543/realms/quarkus}
     client-id: ${OIDC_CLIENT_ID:backend-api}
