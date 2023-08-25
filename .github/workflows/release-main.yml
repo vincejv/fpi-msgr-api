@@ -199,21 +199,21 @@ jobs:
           region: ${{ env.REGION }}
           image: ${{ needs.versioning.outputs.service_image_path }}
           project_id: ${{ env.PROJECT_ID }}
-          flags: --cpu ${{ env.SERVICE_CPU }} --memory ${{ env.SERVICE_MEMORY }} --cpu-throttling
-          env_vars: |
-            DB_NAME=msgr-api-prod
-            OIDC_CLIENT_ID=${{ secrets.OIDC_CLIENT_ID }}
-            OIDC_AUTH_URL=${{ secrets.OIDC_AUTH_URL }}
-            META_GRAPH_API_BASE_URI=${{ secrets.META_GRAPH_API_BASE_URI }}
-            META_FB_PAGE_ID=${{ secrets.META_FB_PAGE_ID }}
-            META_FB_PAGE_ACCESS_TOKEN=${{ secrets.META_FB_PAGE_ACCESS_TOKEN }}
-            TELEGRAM_SECRET_ACCESS_TOKEN=${{ secrets.TELEGRAM_SECRET_ACCESS_TOKEN }}
-            VIBER_API_BASE_URI=${{ secrets.VIBER_API_BASE_URI }}
-            VIBER_AUTH_TOKEN=${{ secrets.VIBER_AUTH_TOKEN }}
-          secrets: |
-            MONGO_CONN_STRING=vbl_mongo_connection_string:latest
-            OIDC_SECRET=oidc_secret_keycloak:latest
-            FPI_APP_TO_APP_TRUSTED_KEY=fpi_app_to_app_trusted_key:latest
+          flags: |
+            --set-env-vars ^##^MONGO_CONN_STRING=${{ secrets.MONGO_CONN_STRING }}
+            --set-env-vars OIDC_CLIENT_ID=${{ secrets.OIDC_CLIENT_ID }}
+            --set-env-vars OIDC_AUTH_URL=${{ secrets.OIDC_AUTH_URL }}
+            --set-env-vars OIDC_SECRET=${{ secrets.OIDC_SECRET }}
+            --set-env-vars META_GRAPH_API_BASE_URI=${{ secrets.META_GRAPH_API_BASE_URI }}
+            --set-env-vars META_FB_PAGE_ID=${{ secrets.META_FB_PAGE_ID }}
+            --set-env-vars META_FB_PAGE_ACCESS_TOKEN=${{ secrets.META_FB_PAGE_ACCESS_TOKEN }}
+            --set-env-vars TELEGRAM_SECRET_ACCESS_TOKEN=${{ secrets.TELEGRAM_SECRET_ACCESS_TOKEN }}
+            --set-env-vars VIBER_API_BASE_URI=${{ secrets.VIBER_API_BASE_URI }}
+            --set-env-vars VIBER_AUTH_TOKEN=${{ secrets.VIBER_AUTH_TOKEN }}
+            --set-env-vars DB_NAME=msgr-api-prod
+            --cpu ${{ env.SERVICE_CPU }}
+            --memory ${{ env.SERVICE_MEMORY }}
+            --cpu-throttling
           labels: |
             env=${{ env.SERVICE_ENV }}
 
